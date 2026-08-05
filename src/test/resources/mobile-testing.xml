@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceLabs Mobile Regression Test-Suite">
+    <test name="Test Execution">
+        <packages>
+            <package name="ua.solvd.sl"/>
+        </packages>
+    </test>
+</suite>
