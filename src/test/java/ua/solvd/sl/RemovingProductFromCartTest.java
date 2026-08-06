@@ -1,27 +1,32 @@
 package ua.solvd.sl;
 
+import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
-import ua.solvd.sl.pages.CartPageCommon;
-import ua.solvd.sl.pages.LoginPageCommon;
-import ua.solvd.sl.pages.ProductsPageCommon;
-import ua.solvd.sl.util.AuthUtils;
+import ua.solvd.sl.pages.CartPageBase;
+import ua.solvd.sl.pages.LoginPageBase;
+import ua.solvd.sl.pages.ProductListItemComponent;
+import ua.solvd.sl.pages.ProductsPageBase;
+import ua.solvd.sl.util.LoginUtil;
 
 public class RemovingProductFromCartTest extends BaseTest {
 
     @Test
+    @MethodOwner(owner = "ivanchelombitko")
     public void testRemoveProductFromCart() {
-        LoginPageCommon loginPage = initPage(getDriver(), LoginPageCommon.class);
-        Assert.assertTrue(loginPage.isUsernameInputReady(), "Login page is not opened.");
-        ProductsPageCommon productsPage = AuthUtils.loginSuccessfully(loginPage, User.STANDARD);
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+        Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
+        LoginUtil.login(loginPage, User.STANDARD);
+        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.BIKE.getTitle();
-        productsPage.scrollToProduct(productName);
-        productsPage.clickAddToCartButton(productName);
-        CartPageCommon cartPage = productsPage.clickCartIcon();
-        Assert.assertTrue(cartPage.isCartTitleVisible(), "Cart screen is not opened.");
-        cartPage.clickRemoveButton(productName);
-        Assert.assertFalse(cartPage.isItemPresentInCart(productName), "Item was not removed from cart.");
+        ProductListItemComponent product = productsPage.getProductByName(productName);
+        product.clickAddToCart();
+        CartPageBase cartPage = productsPage.clickCartIcon();
+        Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
+        cartPage.clickRemoveButton();
+        Assert.assertFalse(cartPage.isItemPresentInCart(), "Item was not removed from cart.");
     }
 }

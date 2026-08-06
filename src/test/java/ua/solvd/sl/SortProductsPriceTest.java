@@ -1,22 +1,29 @@
 package ua.solvd.sl;
 
+import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ua.solvd.sl.constants.Constants;
+import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
-import ua.solvd.sl.pages.LoginPageCommon;
-import ua.solvd.sl.pages.ProductsPageCommon;
-import ua.solvd.sl.util.AuthUtils;
+import ua.solvd.sl.pages.LoginPageBase;
+import ua.solvd.sl.pages.ProductsPageBase;
+import ua.solvd.sl.util.LoginUtil;
 
 public class SortProductsPriceTest extends  BaseTest {
 
     @Test
+    @MethodOwner(owner = "ivanchelombitko")
     public void testSortProductsPriceLowToHigh() {
-        LoginPageCommon loginPage = initPage(getDriver(), LoginPageCommon.class);
-        Assert.assertTrue(loginPage.isUsernameInputReady(), "Login page is not opened.");
-        ProductsPageCommon productsPage = AuthUtils.loginSuccessfully(loginPage, User.STANDARD);
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+        Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
+        LoginUtil.login(loginPage, User.STANDARD);
+        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         productsPage.openSortingModal();
-        productsPage.selectSortingOption("Price (low to high)");
+        String priceSortOrder = Constants.PRICE_SORT_ORDER;
+        productsPage.selectSortingOption(priceSortOrder);
         String firstProduct = productsPage.getFirstProductTitle();
-        Assert.assertEquals(firstProduct, "Sauce Labs Onesie", "Products are not sorted correctly by price ascending.");
+        Assert.assertEquals(firstProduct, Product.ONESIE.getTitle(), "Products are not sorted correctly by price ascending.");
     }
 }

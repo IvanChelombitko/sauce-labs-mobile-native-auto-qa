@@ -1,20 +1,23 @@
 package ua.solvd.sl;
 
+import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.solvd.sl.model.User;
-import ua.solvd.sl.pages.LoginPageCommon;
-import ua.solvd.sl.pages.ProductsPageCommon;
-import ua.solvd.sl.util.AuthUtils;
+import ua.solvd.sl.pages.LoginPageBase;
+import ua.solvd.sl.pages.ProductsPageBase;
+import ua.solvd.sl.util.LoginUtil;
 
 public class LoginSuccessTest extends BaseTest {
 
     @Test
+    @MethodOwner(owner = "ivanchelombitko")
     public void testLoginSuccessStandardUser() {
-        LoginPageCommon loginPage = initPage(getDriver(), LoginPageCommon.class);
-        Assert.assertTrue(loginPage.isUsernameInputReady(), "Login page is not opened.");
-        ProductsPageCommon productsPage = AuthUtils.loginSuccessfully(loginPage, User.STANDARD);
-        Assert.assertTrue(productsPage.isCartIconVisible(), "Cart icon is not visible on Products screen.");
-        Assert.assertTrue(productsPage.isProductGridVisible(), "Product grid is not visible on Products screen.");
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+        Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
+        LoginUtil.login(loginPage, User.STANDARD);
+        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        Assert.assertTrue(productsPage.isCartIconPresent(), "Cart icon is not visible on Products screen.");
+        Assert.assertTrue(productsPage.isProductGridPresent(), "Product grid is not visible on Products screen.");
     }
 }

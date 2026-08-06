@@ -1,27 +1,34 @@
 package ua.solvd.sl;
 
+import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
-import ua.solvd.sl.pages.LoginPageCommon;
-import ua.solvd.sl.pages.ProductDetailsPageCommon;
-import ua.solvd.sl.pages.ProductsPageCommon;
-import ua.solvd.sl.util.AuthUtils;
+import ua.solvd.sl.pages.LoginPageBase;
+import ua.solvd.sl.pages.ProductDetailsPageBase;
+import ua.solvd.sl.pages.ProductListItemComponent;
+import ua.solvd.sl.pages.ProductsPageBase;
+import ua.solvd.sl.util.LoginUtil;
 
 public class ProductDetailsContentTest extends BaseTest {
 
     @Test
-    public void testProductDetailsContent() {
-        LoginPageCommon loginPage = initPage(getDriver(), LoginPageCommon.class);
-        Assert.assertTrue(loginPage.isUsernameInputReady(), "Login page is not opened.");
-        ProductsPageCommon productsPage = AuthUtils.loginSuccessfully(loginPage, User.STANDARD);
+    @MethodOwner(owner = "ivanchelombitko")
+    public void testProductDetailsAreDisplayedCorrectly() {
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+        Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
+        LoginUtil.login(loginPage, User.STANDARD);
+        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.JACKET.getTitle();
-        productsPage.scrollToProduct(productName);
-        ProductDetailsPageCommon detailsPage = productsPage.clickProductTitle(productName);
-        Assert.assertTrue(detailsPage.isProductImageVisible(), "Product image is missing on details screen.");
+        String productPrice = Product.JACKET.getPrice();
+        ProductListItemComponent product = productsPage.getProductByName(productName);
+        product.clickTitle();
+        ProductDetailsPageBase detailsPage = initPage(getDriver(), ProductDetailsPageBase.class);
+        Assert.assertTrue(detailsPage.isProductImagePresent(), "Product image is missing on details screen.");
         Assert.assertEquals(detailsPage.getProductTitleText(), productName, "Product title is incorrect.");
-        Assert.assertEquals(detailsPage.getProductPriceText(), "$49.99", "Product price is incorrect.");
-        Assert.assertTrue(detailsPage.isAddToCartButtonVisible(), "Add to cart button is missing on details screen.");
+        Assert.assertEquals(detailsPage.getProductPriceText(), productPrice, "Product price is incorrect.");
+        Assert.assertTrue(detailsPage.isAddToCartButtonPresent(), "Add to cart button is missing on details screen.");
     }
 }
