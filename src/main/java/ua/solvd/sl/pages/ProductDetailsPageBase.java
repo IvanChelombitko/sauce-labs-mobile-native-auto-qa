@@ -37,7 +37,7 @@ public abstract class ProductDetailsPageBase extends BasePage {
     }
 
     public boolean isAddToCartButtonPresent() {
-        addToCartButton.scrollTo();
+        swipe(addToCartButton);
         return addToCartButton.isElementPresent(Constants.DEFAULT_ELEMENT_TIMEOUT);
     }
 }

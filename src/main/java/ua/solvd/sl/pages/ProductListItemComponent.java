@@ -5,11 +5,12 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 import ua.solvd.sl.constants.Constants;
 
 public class ProductListItemComponent extends AbstractUIObject {
 
-    @ExtendedFindBy(accessibilityId = "test-Item title")
+    @FindBy(xpath = "//*[normalize-space(@content-desc)='test-Item title' or normalize-space(@name)='test-Item title']")
     private ExtendedWebElement productTitle;
 
     @ExtendedFindBy(accessibilityId = "test-ADD TO CART")
@@ -23,6 +24,9 @@ public class ProductListItemComponent extends AbstractUIObject {
     }
 
     public String getProductTitleText() {
+        if (productTitle.isElementNotPresent(Constants.DEFAULT_ELEMENT_TIMEOUT)) {
+            return "";
+        }
         return productTitle.getText();
     }
 
