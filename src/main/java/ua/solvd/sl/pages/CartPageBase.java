@@ -17,6 +17,9 @@ public abstract class CartPageBase extends BasePage {
     @ExtendedFindBy(accessibilityId = "test-Item Title")
     protected ExtendedWebElement itemTitle;
 
+    @ExtendedFindBy(accessibilityId = "test-CHECKOUT")
+    protected ExtendedWebElement checkoutButton;
+
     public CartPageBase(WebDriver driver) {
         super(driver);
     }
@@ -31,5 +34,10 @@ public abstract class CartPageBase extends BasePage {
 
     public boolean isItemPresentInCart() {
         return itemTitle.isElementPresent(Constants.DEFAULT_ELEMENT_TIMEOUT);
+    }
+
+    public CheckoutPageBase clickCheckoutButton() {
+        checkoutButton.click();
+        return initPage(getDriver(), CheckoutPageBase.class);
     }
 }

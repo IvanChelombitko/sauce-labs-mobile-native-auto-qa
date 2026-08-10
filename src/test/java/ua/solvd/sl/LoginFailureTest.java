@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.constants.Constants;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.LoginPageBase;
-import ua.solvd.sl.util.LoginUtil;
+import ua.solvd.sl.util.UserUtil;
 
 public class LoginFailureTest extends BaseTest {
 
@@ -15,7 +15,7 @@ public class LoginFailureTest extends BaseTest {
     public void testLoginFailureLockedOutUser() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        LoginUtil.login(loginPage, User.LOCKED_OUT);
+        UserUtil.login(loginPage, User.LOCKED_OUT);
         Assert.assertEquals(loginPage.getErrorMessageText(), Constants.LOCKED_OUT_ERROR_MSG, "Error message text is incorrect or missing.");
     }
 }

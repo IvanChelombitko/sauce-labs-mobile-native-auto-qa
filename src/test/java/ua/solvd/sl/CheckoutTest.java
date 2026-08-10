@@ -6,27 +6,35 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.CartPageBase;
+import ua.solvd.sl.pages.CheckoutPageBase;
+import ua.solvd.sl.pages.CompletePageBase;
 import ua.solvd.sl.pages.LoginPageBase;
+import ua.solvd.sl.pages.OverviewPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
 import ua.solvd.sl.util.UserUtil;
 
-public class RemovingProductFromCartTest extends BaseTest {
+public class CheckoutTest extends BaseTest {
 
     @Test
     @MethodOwner(owner = "ivanchelombitko")
-    public void testRemoveProductFromCart() {
+    public void testCheckoutFlow() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
         UserUtil.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
-        String productName = Product.BIKE.getTitle();
+        String productName = Product.JACKET.getTitle();
         ProductListItemComponent product = productsPage.getProductByName(productName);
         product.clickAddToCart();
         CartPageBase cartPage = productsPage.clickCartIcon();
         Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
-        cartPage.clickRemoveButton();
-        Assert.assertFalse(cartPage.isItemPresentInCart(), "Item was not removed from cart.");
+        CheckoutPageBase checkoutPage = cartPage.clickCheckoutButton();
+        Assert.assertTrue(checkoutPage.isFirstNameFieldPresent(), "Checkout page is not opened.");
+        UserUtil.fillUserData(checkoutPage, User.STANDARD);
+        OverviewPageBase overviewPage = initPage(getDriver(), OverviewPageBase.class);
+        Assert.assertTrue(overviewPage.isFinishButtonPresent(), "Overview page is not opened.");
+        CompletePageBase completePage = overviewPage.clickFinishButton();
+        Assert.assertTrue(completePage.isThankYouTextBoxPresent(), "Complete page is not opened.");
     }
 }

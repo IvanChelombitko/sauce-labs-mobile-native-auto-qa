@@ -8,7 +8,7 @@ import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.LoginUtil;
+import ua.solvd.sl.util.UserUtil;
 
 public class SortProductsPriceTest extends  BaseTest {
 
@@ -17,7 +17,7 @@ public class SortProductsPriceTest extends  BaseTest {
     public void testSortProductsPriceLowToHigh() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        LoginUtil.login(loginPage, User.STANDARD);
+        UserUtil.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         productsPage.openSortingModal();

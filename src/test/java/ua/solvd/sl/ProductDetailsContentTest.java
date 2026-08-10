@@ -9,7 +9,7 @@ import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductDetailsPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.LoginUtil;
+import ua.solvd.sl.util.UserUtil;
 
 public class ProductDetailsContentTest extends BaseTest {
 
@@ -18,7 +18,7 @@ public class ProductDetailsContentTest extends BaseTest {
     public void testProductDetailsAreDisplayedCorrectly() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        LoginUtil.login(loginPage, User.STANDARD);
+        UserUtil.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.JACKET.getTitle();
