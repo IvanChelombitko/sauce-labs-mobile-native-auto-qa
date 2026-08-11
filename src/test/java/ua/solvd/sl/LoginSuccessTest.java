@@ -17,7 +17,7 @@ public class LoginSuccessTest extends BaseTest {
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
         UserUtil.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
-        Assert.assertTrue(productsPage.isCartIconPresent(), "Cart icon is not visible on Products screen.");
+        Assert.assertTrue(productsPage.getHeader().isCartIconPresent(), "Cart icon is not visible on Products screen.");
         Assert.assertTrue(productsPage.isProductGridPresent(), "Product grid is not visible on Products screen.");
     }
 }

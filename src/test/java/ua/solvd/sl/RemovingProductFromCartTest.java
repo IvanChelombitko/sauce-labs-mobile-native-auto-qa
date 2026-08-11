@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.CartPageBase;
+import ua.solvd.sl.pages.HeaderComponent;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
@@ -24,7 +25,8 @@ public class RemovingProductFromCartTest extends BaseTest {
         String productName = Product.BIKE.getTitle();
         ProductListItemComponent product = productsPage.getProductByName(productName);
         product.clickAddToCart();
-        CartPageBase cartPage = productsPage.clickCartIcon();
+        productsPage.getHeader().clickCartIcon();
+        CartPageBase cartPage = initPage(getDriver(), CartPageBase.class);
         Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
         cartPage.clickRemoveButton();
         Assert.assertFalse(cartPage.isItemPresentInCart(), "Item was not removed from cart.");

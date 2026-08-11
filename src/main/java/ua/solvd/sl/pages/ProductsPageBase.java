@@ -10,9 +10,6 @@ import java.util.Optional;
 
 public abstract class ProductsPageBase extends BasePage {
 
-    @ExtendedFindBy(accessibilityId = "test-Cart")
-    protected ExtendedWebElement cartIcon;
-
     @ExtendedFindBy(accessibilityId = "test-PRODUCTS")
     protected ExtendedWebElement productGrid;
 
@@ -29,21 +26,8 @@ public abstract class ProductsPageBase extends BasePage {
         super(driver);
     }
 
-    public boolean isCartIconPresent() {
-        return cartIcon.isElementPresent(Constants.DEFAULT_ELEMENT_TIMEOUT);
-    }
-
     public boolean isProductGridPresent() {
         return productGrid.isElementPresent(Constants.DEFAULT_ELEMENT_TIMEOUT);
-    }
-
-    public String getCartBadgeCount() {
-        return cartIcon.getText();
-    }
-
-    public CartPageBase clickCartIcon() {
-        cartIcon.click();
-        return initPage(getDriver(), CartPageBase.class);
     }
 
     public void openSortingModal() {

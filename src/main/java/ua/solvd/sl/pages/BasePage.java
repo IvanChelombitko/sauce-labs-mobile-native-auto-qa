@@ -8,4 +8,9 @@ public abstract class BasePage extends AbstractPage implements IMobileUtils {
     public BasePage(WebDriver driver) {
         super(driver);
     }
+
+    public HeaderComponent getHeader() {
+        BasePageCommon basePageCommon = initPage(getDriver(), BasePageCommon.class);
+        return basePageCommon.getHeader();
+    }
 }

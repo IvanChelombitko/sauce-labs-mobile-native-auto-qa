@@ -26,7 +26,8 @@ public class EmptyUserNameTest extends BaseTest {
         String productName = Product.JACKET.getTitle();
         ProductListItemComponent product = productsPage.getProductByName(productName);
         product.clickAddToCart();
-        CartPageBase cartPage = productsPage.clickCartIcon();
+        productsPage.getHeader().clickCartIcon();
+        CartPageBase cartPage = initPage(getDriver(), CartPageBase.class);
         Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
         CheckoutPageBase checkoutPage = cartPage.clickCheckoutButton();
         Assert.assertTrue(checkoutPage.isFirstNameFieldPresent(), "Checkout page is not opened.");

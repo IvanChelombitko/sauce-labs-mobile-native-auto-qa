@@ -12,19 +12,11 @@ import ua.solvd.sl.pages.ProductsPageBase;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsPageBase.class)
 public class AndroidProductsPage extends ProductsPageBase {
 
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Cart']//android.widget.TextView")
-    private ExtendedWebElement cartBadgeCount;
-
     @FindBy(xpath = "//android.view.ViewGroup[android.widget.TextView[@text='%s']]")
     private ExtendedWebElement sortingOptionAndroid;
 
     public AndroidProductsPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    public String getCartBadgeCount() {
-        return cartBadgeCount.getText();
     }
 
     @Override

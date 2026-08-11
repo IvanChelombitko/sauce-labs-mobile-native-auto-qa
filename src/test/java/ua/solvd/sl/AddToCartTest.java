@@ -25,6 +25,6 @@ public class AddToCartTest extends BaseTest {
         ProductListItemComponent product = productsPage.getProductByName(productTitle);
         product.clickAddToCart();
         Assert.assertTrue(product.isRemoveButtonPresent(), "Add to Cart button did not change to Remove button.");
-        Assert.assertEquals(productsPage.getCartBadgeCount(), Constants.CART_BADGE_ONE_ITEM, "Cart badge count is incorrect.");
+        Assert.assertEquals(productsPage.getHeader().getCartBadgeCount(), Constants.CART_BADGE_ONE_ITEM, "Cart badge count is incorrect.");
     }
 }
