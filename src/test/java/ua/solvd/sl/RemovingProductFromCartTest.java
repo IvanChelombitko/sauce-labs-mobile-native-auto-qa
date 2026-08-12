@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.CartPageBase;
-import ua.solvd.sl.pages.HeaderComponent;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
@@ -14,7 +13,7 @@ import ua.solvd.sl.util.UserUtil;
 
 public class RemovingProductFromCartTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-004")
     @MethodOwner(owner = "ivanchelombitko")
     public void testRemoveProductFromCart() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);

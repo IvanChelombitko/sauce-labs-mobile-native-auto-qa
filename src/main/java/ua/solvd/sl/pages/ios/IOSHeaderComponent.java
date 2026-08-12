@@ -13,6 +13,16 @@ public class IOSHeaderComponent extends HeaderComponent {
     }
 
     @Override
+    public void clickHamburgerMenu() {
+        int centerX = hamburgerMenuButton.getElement().getSize().getWidth() / 2;
+        int centerY = hamburgerMenuButton.getElement().getSize().getHeight() / 2;
+        new Actions(getDriver())
+                .moveToElement(hamburgerMenuButton.getElement(), centerX, centerY)
+                .click()
+                .perform();
+    }
+
+    @Override
     public void clickCartIcon() {
         int centerX = cartIcon.getElement().getSize().getWidth() / 2;
         int centerY = cartIcon.getElement().getSize().getHeight() / 2;

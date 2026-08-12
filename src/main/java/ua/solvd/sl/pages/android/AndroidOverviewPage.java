@@ -9,6 +9,4 @@ public class AndroidOverviewPage extends OverviewPageBase {
     public AndroidOverviewPage(WebDriver driver) {
         super(driver);
     }
-
-
 }

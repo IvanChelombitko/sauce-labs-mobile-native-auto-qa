@@ -9,7 +9,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import ua.solvd.sl.constants.Constants;
 
-public class HeaderComponent extends AbstractUIObject {
+public class HeaderComponent extends AbstractUIObject implements ICustomTypePageFactory, IMobileUtils {
 
     @ExtendedFindBy(accessibilityId = "test-Menu")
     protected ExtendedWebElement hamburgerMenuButton;
@@ -21,7 +21,7 @@ public class HeaderComponent extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public void clickMenu() {
+    public void clickHamburgerMenu() {
         hamburgerMenuButton.click();
     }
 
@@ -31,6 +31,10 @@ public class HeaderComponent extends AbstractUIObject {
 
     public String getCartBadgeCount() {
         return cartIcon.getText();
+    }
+
+    public boolean isCartBadgeCountPresent() {
+        return cartIcon.getText().isEmpty();
     }
 
     public void clickCartIcon() {

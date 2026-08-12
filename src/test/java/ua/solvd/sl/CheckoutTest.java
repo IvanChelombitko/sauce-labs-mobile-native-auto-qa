@@ -16,7 +16,7 @@ import ua.solvd.sl.util.UserUtil;
 
 public class CheckoutTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-008")
     @MethodOwner(owner = "ivanchelombitko")
     public void testCheckoutFlow() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);

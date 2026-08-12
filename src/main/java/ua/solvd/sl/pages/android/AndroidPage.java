@@ -2,12 +2,17 @@ package ua.solvd.sl.pages.android;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 import ua.solvd.sl.pages.BasePageCommon;
 import ua.solvd.sl.pages.HeaderComponent;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = BasePageCommon.class)
-public class AndroidBasePageCommon extends BasePageCommon {
-    public AndroidBasePageCommon(WebDriver driver) {
+public class AndroidPage extends BasePageCommon {
+
+    @FindBy(xpath = "//*[//*[@content-desc='test-Menu'] and //*[@content-desc='test-Cart']][1]")
+    private AndroidHeaderComponent header;
+
+    public AndroidPage(WebDriver driver) {
         super(driver);
     }
 

@@ -10,7 +10,7 @@ import ua.solvd.sl.util.UserUtil;
 
 public class LoginSuccessTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-001")
     @MethodOwner(owner = "ivanchelombitko")
     public void testLoginSuccessStandardUser() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);

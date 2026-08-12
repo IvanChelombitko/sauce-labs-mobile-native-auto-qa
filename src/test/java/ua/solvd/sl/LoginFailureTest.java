@@ -10,7 +10,7 @@ import ua.solvd.sl.util.UserUtil;
 
 public class LoginFailureTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-002")
     @MethodOwner(owner = "ivanchelombitko")
     public void testLoginFailureLockedOutUser() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);

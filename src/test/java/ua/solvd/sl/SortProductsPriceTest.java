@@ -10,9 +10,9 @@ import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductsPageBase;
 import ua.solvd.sl.util.UserUtil;
 
-public class SortProductsPriceTest extends  BaseTest {
+public class SortProductsPriceTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-005")
     @MethodOwner(owner = "ivanchelombitko")
     public void testSortProductsPriceLowToHigh() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);

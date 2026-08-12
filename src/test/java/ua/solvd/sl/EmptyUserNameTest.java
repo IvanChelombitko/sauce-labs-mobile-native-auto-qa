@@ -15,7 +15,7 @@ import ua.solvd.sl.util.UserUtil;
 
 public class EmptyUserNameTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-007")
     @MethodOwner(owner = "ivanchelombitko")
     public void testEmptyUserNameField() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);

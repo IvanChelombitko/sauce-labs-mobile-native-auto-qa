@@ -13,7 +13,7 @@ import ua.solvd.sl.util.UserUtil;
 
 public class ProductDetailsContentTest extends BaseTest {
 
-    @Test
+    @Test(description = "TC-006")
     @MethodOwner(owner = "ivanchelombitko")
     public void testProductDetailsAreDisplayedCorrectly() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
