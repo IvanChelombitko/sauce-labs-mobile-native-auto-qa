@@ -9,7 +9,7 @@ import ua.solvd.sl.pages.HeaderComponent;
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = BasePageCommon.class)
 public class IOSPage extends BasePageCommon {
 
-    @FindBy(xpath = "//*[//*[@name='test-Menu'] and //*[@name='test-Cart']][1]")
+    @FindBy(xpath = "//XCUIElementTypeOther[.//XCUIElementTypeOther[@name='test-Menu'] and .//XCUIElementTypeOther[@name='test-Cart']][1]")
     private IOSHeaderComponent header;
 
     public IOSPage(WebDriver driver) {

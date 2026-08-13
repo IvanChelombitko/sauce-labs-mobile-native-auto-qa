@@ -12,7 +12,7 @@ import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.OverviewPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.UserUtil;
+import ua.solvd.sl.util.UserService;
 
 public class CheckoutTest extends BaseTest {
 
@@ -21,7 +21,7 @@ public class CheckoutTest extends BaseTest {
     public void testCheckoutFlow() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        UserUtil.login(loginPage, User.STANDARD);
+        UserService.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.JACKET.getTitle();
@@ -32,7 +32,7 @@ public class CheckoutTest extends BaseTest {
         Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
         CheckoutPageBase checkoutPage = cartPage.clickCheckoutButton();
         Assert.assertTrue(checkoutPage.isFirstNameFieldPresent(), "Checkout page is not opened.");
-        UserUtil.fillUserData(checkoutPage, User.STANDARD);
+        UserService.fillUserData(checkoutPage, User.STANDARD);
         OverviewPageBase overviewPage = initPage(getDriver(), OverviewPageBase.class);
         Assert.assertTrue(overviewPage.isFinishButtonPresent(), "Overview page is not opened.");
         CompletePageBase completePage = overviewPage.clickFinishButton();

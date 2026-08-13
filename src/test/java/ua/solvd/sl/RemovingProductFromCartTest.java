@@ -9,7 +9,7 @@ import ua.solvd.sl.pages.CartPageBase;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.UserUtil;
+import ua.solvd.sl.util.UserService;
 
 public class RemovingProductFromCartTest extends BaseTest {
 
@@ -18,7 +18,7 @@ public class RemovingProductFromCartTest extends BaseTest {
     public void testRemoveProductFromCart() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        UserUtil.login(loginPage, User.STANDARD);
+        UserService.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.BIKE.getTitle();

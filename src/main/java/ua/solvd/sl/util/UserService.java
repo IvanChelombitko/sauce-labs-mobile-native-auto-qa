@@ -4,8 +4,8 @@ import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.CheckoutPageBase;
 import ua.solvd.sl.pages.LoginPageBase;
 
-public class UserUtil {
-    private UserUtil() {
+public class UserService {
+    private UserService() {
     }
 
     public static void login(LoginPageBase loginPage, User user) {

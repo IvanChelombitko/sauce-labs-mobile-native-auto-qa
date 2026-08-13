@@ -6,11 +6,11 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.constants.Constants;
 import ua.solvd.sl.model.Product;
 import ua.solvd.sl.model.User;
-import ua.solvd.sl.pages.HamburgerMenuBasePage;
+import ua.solvd.sl.pages.HamburgerMenuPageBase;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.UserUtil;
+import ua.solvd.sl.util.UserService;
 
 public class ResetAppStateTest extends BaseTest {
 
@@ -19,7 +19,7 @@ public class ResetAppStateTest extends BaseTest {
     public void testResetAppState() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        UserUtil.login(loginPage, User.STANDARD);
+        UserService.login(loginPage, User.STANDARD);
         ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productTitle = Product.BACKPACK.getTitle();
@@ -27,7 +27,7 @@ public class ResetAppStateTest extends BaseTest {
         product.clickAddToCart();
         Assert.assertEquals(productsPage.getHeader().getCartBadgeCount(), Constants.CART_BADGE_ONE_ITEM, "Cart badge count is incorrect.");
         productsPage.getHeader().clickHamburgerMenu();
-        HamburgerMenuBasePage hamburgerMenuPage = initPage(getDriver(), HamburgerMenuBasePage.class);
+        HamburgerMenuPageBase hamburgerMenuPage = initPage(getDriver(), HamburgerMenuPageBase.class);
         Assert.assertTrue(hamburgerMenuPage.isAllItemsButtonPresent(), "Hamburger menu is not opened.");
         hamburgerMenuPage.clickResetAppStateButton();
         Assert.assertTrue(productsPage.getHeader().isCartBadgeCountPresent(), "Cart badge count is incorrect.");

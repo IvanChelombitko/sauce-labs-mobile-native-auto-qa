@@ -9,7 +9,7 @@ import ua.solvd.sl.pages.HeaderComponent;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = BasePageCommon.class)
 public class AndroidPage extends BasePageCommon {
 
-    @FindBy(xpath = "//*[//*[@content-desc='test-Menu'] and //*[@content-desc='test-Cart']][1]")
+    @FindBy(xpath = "//android.view.ViewGroup[.//android.view.ViewGroup[@content-desc='test-Menu'] and .//android.view.ViewGroup[@content-desc='test-Cart']][1]")
     private AndroidHeaderComponent header;
 
     public AndroidPage(WebDriver driver) {

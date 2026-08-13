@@ -5,7 +5,7 @@ import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import ua.solvd.sl.constants.Constants;
 
-public class HamburgerMenuBasePage extends BasePage {
+public class HamburgerMenuPageBase extends BasePage {
 
     @ExtendedFindBy(accessibilityId = "test-ALL ITEMS")
     protected ExtendedWebElement allItemsButton;
@@ -16,7 +16,10 @@ public class HamburgerMenuBasePage extends BasePage {
     @ExtendedFindBy(accessibilityId = "test-WEBVIEW")
     protected ExtendedWebElement webviewButton;
 
-    public HamburgerMenuBasePage(WebDriver driver) {
+    @ExtendedFindBy(accessibilityId = "test-DRAWING")
+    protected ExtendedWebElement drawingButton;
+
+    public HamburgerMenuPageBase(WebDriver driver) {
         super(driver);
     }
 
@@ -31,5 +34,10 @@ public class HamburgerMenuBasePage extends BasePage {
     public WebviewSelectionPageBase clickWebviewButton() {
         webviewButton.click();
         return initPage(getDriver(), WebviewSelectionPageBase.class);
+    }
+
+    public DrawingPageBase clickDrawingButton() {
+        drawingButton.click();
+        return initPage(getDriver(), DrawingPageBase.class);
     }
 }
