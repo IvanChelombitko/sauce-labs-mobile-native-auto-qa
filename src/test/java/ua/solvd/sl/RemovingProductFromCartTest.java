@@ -9,7 +9,7 @@ import ua.solvd.sl.pages.CartPageBase;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.UserService;
+import ua.solvd.sl.service.UserService;
 
 public class RemovingProductFromCartTest extends BaseTest {
 
@@ -18,14 +18,12 @@ public class RemovingProductFromCartTest extends BaseTest {
     public void testRemoveProductFromCart() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        UserService.login(loginPage, User.STANDARD);
-        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        ProductsPageBase productsPage = UserService.login(loginPage, User.STANDARD);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.BIKE.getTitle();
         ProductListItemComponent product = productsPage.getProductByName(productName);
         product.clickAddToCart();
-        productsPage.getHeader().clickCartIcon();
-        CartPageBase cartPage = initPage(getDriver(), CartPageBase.class);
+        CartPageBase cartPage = productsPage.getHeader().clickCartIcon();
         Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
         cartPage.clickRemoveButton();
         Assert.assertFalse(cartPage.isItemPresentInCart(), "Item was not removed from cart.");
