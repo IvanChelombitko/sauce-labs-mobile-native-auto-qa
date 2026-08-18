@@ -9,7 +9,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import ua.solvd.sl.constants.Constants;
 
-public class HeaderComponent extends AbstractUIObject implements ICustomTypePageFactory, IMobileUtils {
+public abstract class HeaderComponent extends AbstractUIObject implements ICustomTypePageFactory, IMobileUtils {
 
     @ExtendedFindBy(accessibilityId = "test-Menu")
     protected ExtendedWebElement hamburgerMenuButton;
@@ -21,8 +21,9 @@ public class HeaderComponent extends AbstractUIObject implements ICustomTypePage
         super(driver, searchContext);
     }
 
-    public void clickHamburgerMenu() {
+    public HamburgerMenuPageBase clickHamburgerMenu() {
         hamburgerMenuButton.click();
+        return initPage(getDriver(), HamburgerMenuPageBase.class);
     }
 
     public boolean isCartIconPresent() {
@@ -37,7 +38,8 @@ public class HeaderComponent extends AbstractUIObject implements ICustomTypePage
         return cartIcon.getText().isEmpty();
     }
 
-    public void clickCartIcon() {
+    public CartPageBase clickCartIcon() {
         cartIcon.click();
+        return initPage(getDriver(), CartPageBase.class);
     }
 }

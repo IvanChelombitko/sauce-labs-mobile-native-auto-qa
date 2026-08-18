@@ -30,8 +30,9 @@ public class CheckoutPageBase extends BasePage {
         return firstNameField.isElementPresent(Constants.DEFAULT_ELEMENT_TIMEOUT);
     }
 
-    public void clickContinueButton() {
+    public OverviewPageBase clickContinueButton() {
         continueButton.click();
+        return initPage(getDriver(), OverviewPageBase.class);
     }
 
     public String getErrorMessageText() {

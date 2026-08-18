@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.constants.Constants;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.LoginPageBase;
-import ua.solvd.sl.util.UserService;
+import ua.solvd.sl.service.UserService;
 
 public class LoginFailureTest extends BaseTest {
 

@@ -12,7 +12,7 @@ import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.OverviewPageBase;
 import ua.solvd.sl.pages.ProductListItemComponent;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.UserService;
+import ua.solvd.sl.service.UserService;
 
 public class CheckoutTest extends BaseTest {
 
@@ -21,19 +21,16 @@ public class CheckoutTest extends BaseTest {
     public void testCheckoutFlow() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        UserService.login(loginPage, User.STANDARD);
-        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        ProductsPageBase productsPage = UserService.login(loginPage, User.STANDARD);
         Assert.assertTrue(productsPage.isProductGridPresent(), "Products page is not opened after login.");
         String productName = Product.JACKET.getTitle();
         ProductListItemComponent product = productsPage.getProductByName(productName);
         product.clickAddToCart();
-        productsPage.getHeader().clickCartIcon();
-        CartPageBase cartPage = initPage(getDriver(), CartPageBase.class);
+        CartPageBase cartPage = productsPage.getHeader().clickCartIcon();
         Assert.assertTrue(cartPage.isCartTitlePresent(), "Cart screen is not opened.");
         CheckoutPageBase checkoutPage = cartPage.clickCheckoutButton();
         Assert.assertTrue(checkoutPage.isFirstNameFieldPresent(), "Checkout page is not opened.");
-        UserService.fillUserData(checkoutPage, User.STANDARD);
-        OverviewPageBase overviewPage = initPage(getDriver(), OverviewPageBase.class);
+        OverviewPageBase overviewPage = UserService.fillUserData(checkoutPage, User.STANDARD);
         Assert.assertTrue(overviewPage.isFinishButtonPresent(), "Overview page is not opened.");
         CompletePageBase completePage = overviewPage.clickFinishButton();
         Assert.assertTrue(completePage.isThankYouTextBoxPresent(), "Complete page is not opened.");

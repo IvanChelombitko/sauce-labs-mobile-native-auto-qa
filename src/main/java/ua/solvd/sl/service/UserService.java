@@ -1,23 +1,25 @@
-package ua.solvd.sl.util;
+package ua.solvd.sl.service;
 
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.CheckoutPageBase;
 import ua.solvd.sl.pages.LoginPageBase;
+import ua.solvd.sl.pages.OverviewPageBase;
+import ua.solvd.sl.pages.ProductsPageBase;
 
 public class UserService {
     private UserService() {
     }
 
-    public static void login(LoginPageBase loginPage, User user) {
+    public static ProductsPageBase login(LoginPageBase loginPage, User user) {
         loginPage.typeUsername(user.getUsername());
         loginPage.typePassword(user.getPassword());
-        loginPage.clickLoginButton();
+        return loginPage.clickLoginButton();
     }
 
-    public static void fillUserData(CheckoutPageBase checkoutPage, User user) {
+    public static OverviewPageBase fillUserData(CheckoutPageBase checkoutPage, User user) {
         checkoutPage.typeFirstName(user.getFirstName());
         checkoutPage.typeLastName(user.getLastName());
         checkoutPage.typeZipCode(user.getZipCode());
-        checkoutPage.clickContinueButton();
+        return checkoutPage.clickContinueButton();
     }
 }

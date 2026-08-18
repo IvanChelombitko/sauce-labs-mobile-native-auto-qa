@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import ua.solvd.sl.model.User;
 import ua.solvd.sl.pages.LoginPageBase;
 import ua.solvd.sl.pages.ProductsPageBase;
-import ua.solvd.sl.util.UserService;
+import ua.solvd.sl.service.UserService;
 
 public class LoginSuccessTest extends BaseTest {
 
@@ -15,8 +15,7 @@ public class LoginSuccessTest extends BaseTest {
     public void testLoginSuccessStandardUser() {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isUsernameInputPresent(), "Login page is not opened.");
-        UserService.login(loginPage, User.STANDARD);
-        ProductsPageBase productsPage = initPage(getDriver(), ProductsPageBase.class);
+        ProductsPageBase productsPage = UserService.login(loginPage, User.STANDARD);
         Assert.assertTrue(productsPage.getHeader().isCartIconPresent(), "Cart icon is not visible on Products screen.");
         Assert.assertTrue(productsPage.isProductGridPresent(), "Product grid is not visible on Products screen.");
     }

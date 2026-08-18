@@ -31,8 +31,9 @@ public abstract class LoginPageBase extends BasePage {
         passwordInput.type(password);
     }
 
-    public void clickLoginButton() {
+    public ProductsPageBase clickLoginButton() {
         loginButton.click();
+        return initPage(getDriver(), ProductsPageBase.class);
     }
 
     public String getErrorMessageText() {
