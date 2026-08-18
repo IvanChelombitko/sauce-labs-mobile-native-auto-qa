@@ -1,0 +1,12 @@
+package ua.solvd.sl.pages.ios;
+
+import com.zebrunner.carina.utils.factory.DeviceType;
+import org.openqa.selenium.WebDriver;
+import ua.solvd.sl.pages.CompletePageBase;
+
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CompletePageBase.class)
+public class IOSCompletePage extends CompletePageBase {
+    public IOSCompletePage(WebDriver driver) {
+        super(driver);
+    }
+}

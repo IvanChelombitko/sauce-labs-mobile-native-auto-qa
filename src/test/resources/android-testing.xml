@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="SauceLabs Android Regression Test-Suite" parallel="false" thread-count="1">
-    <test name="Android Test Execution">
-        <packages>
-            <package name="ua.solvd.saucelabs"/>
-        </packages>
-    </test>
-</suite>
